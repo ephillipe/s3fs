@@ -1,7 +1,6 @@
 FROM debian:wheezy
 MAINTAINER Roman Atachiants "roman@misakai.com"
 
-
 # The dependencies needed for the compilation process, they will be deleted once the docker image is baked
 ENV SETUP_TOOLS="build-essential libmount1 libblkid1 libfuse-dev fuse-utils libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget tar"
 WORKDIR /deploy
@@ -23,6 +22,3 @@ RUN apt-get update -qq \
 	&& apt-get remove -y --purge --force-yes $SETUP_TOOLS \
 	&& apt-get autoremove -y --force-yes \
 	&& rm -rf /deploy
-
-
-CMD ["/bin/bash", "/app/deploy.sh"]
