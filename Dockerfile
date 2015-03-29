@@ -21,4 +21,5 @@ RUN apt-get update -qq \
 	&& mkdir /data \
 	&& apt-get remove -y --purge --force-yes build-essential libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget \
 	&& apt-get autoremove -y --force-yes \
+	&& apt-get install -y libcurl3 libxml2
 	&& rm -rf /deploy
