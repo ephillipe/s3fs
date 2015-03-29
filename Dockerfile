@@ -20,6 +20,9 @@ RUN apt-get update -qq \
 	&& make \
 	&& make install \
 	&& mkdir /data \
-	&& apt-get remove -y --purge $SETUP_TOOLS \
-	&& apt-get autoremove -y \
+	&& apt-get remove -y --purge --force-yes $SETUP_TOOLS \
+	&& apt-get autoremove -y --force-yes \
 	&& rm -rf /deploy
+
+
+CMD ["/bin/bash", "/app/deploy.sh"]
