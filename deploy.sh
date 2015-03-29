@@ -10,3 +10,5 @@ export AWSACCESSKEYID=AWS_ACCESS_KEY
 export AWSSECRETACCESSKEY=AWS_SECRET_KEY
 
 /usr/bin/s3fs -o allow_other -o use_cache=/tmp $BUCKET /data
+
+#  CMD ["/bin/bash", "/app/deploy.sh"]
