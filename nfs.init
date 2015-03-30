@@ -6,5 +6,4 @@
 rpcbind
 service nfs-kernel-server start
 
-#exec inotifywait -m /data
-inotifywait -m /data
+exec inotifywait -m /data
