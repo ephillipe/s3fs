@@ -20,19 +20,10 @@ RUN apt-get update -qq \
 	&& apt-get remove -y --purge --force-yes build-essential libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget \
 	&& apt-get autoremove -y --force-yes \
 	&& apt-get install -y libcurl3 libxml2 \
-	&& apt-get install -y nfs-kernel-server nfs-common runit inotify-tools \
 	&& rm -rf /deploy \
 	&& mkdir -p /etc/sv/nfs
 
 WORKDIR /
-
-ADD nfs.init /etc/sv/nfs/run
-ADD nfs.stop /etc/sv/nfs/finish
-ADD deploy.sh /usr/local/bin/deploy.sh
-
 VOLUME /data
-EXPOSE 111/udp 2049/tcp
-
-
 
 CMD ["/bin/bash", "/usr/local/bin/deploy.sh"]
