@@ -9,7 +9,8 @@
 export AWSACCESSKEYID=$AWS_ACCESS_KEY
 export AWSSECRETACCESSKEY=$AWS_SECRET_KEY
 
-/usr/bin/s3fs -o allow_other -o use_cache=/tmp $BUCKET /data
+#/usr/bin/s3fs -o allow_other -o use_cache=/tmp $BUCKET /data
+/usr/bin/s3fs -o allow_other $BUCKET /data
 
 echo "/data *(rw,sync,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
 #echo "/data *(rw,async,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
