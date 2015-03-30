@@ -13,5 +13,10 @@ export AWSSECRETACCESSKEY=$AWS_SECRET_KEY
 
 #set -e
 echo "/data *(rw,sync,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
+
+chmod 777 /etc/sv/nfs/run
+chmod 777 /etc/sv/nfs/finish
+chmod 777 /etc/exports
+
 #exec runsvdir /etc/sv
 runsvdir /etc/sv
