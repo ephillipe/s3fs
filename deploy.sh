@@ -17,6 +17,13 @@ echo "/data *(rw,async,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
 chmod 777 /etc/sv/nfs/run
 chmod 777 /etc/sv/nfs/finish
 chmod 777 /etc/exports
-chmod 777 /data
+#chmod 777 /data
 
 runsvdir /etc/sv
+
+# On HOST:
+# sudo modprobe nfs
+# sudo modprobe nfsd
+
+# Example:
+# docker run --name s3fs -d --net=host --privileged -e BUCKET=XXX -e AWS_ACCESS_KEY=XXX -e AWS_SECRET_KEY=XXX misakai/s3fs
