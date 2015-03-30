@@ -11,6 +11,6 @@ export AWSSECRETACCESSKEY=$AWS_SECRET_KEY
 
 /usr/bin/s3fs -o allow_other -o use_cache=/tmp $BUCKET /data -f
 
-#set -e
-#echo "/data *(rw,sync,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
-#exec runsvdir /etc/sv
+set -e
+echo "/data *(rw,sync,no_subtree_check,fsid=0,no_root_squash)" >> /etc/exports
+exec runsvdir /etc/sv
