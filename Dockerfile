@@ -16,7 +16,6 @@ RUN apt-get update -qq \
 	&& make \
 	&& make install \
 	&& mkdir /data \
-	&& mkdir /exports \
 	&& apt-get remove -y --purge --force-yes build-essential libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget \
 	&& apt-get autoremove -y --force-yes \
 	&& apt-get install -y libcurl3 libxml2 \
@@ -30,7 +29,7 @@ ADD nfs.init /etc/sv/nfs/run
 ADD nfs.stop /etc/sv/nfs/finish
 ADD deploy.sh /usr/local/bin/deploy.sh
 
-VOLUME /exports
+VOLUME /data
 EXPOSE 111/udp 2049/tcp
 
 
