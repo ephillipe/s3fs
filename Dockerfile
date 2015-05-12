@@ -1,8 +1,11 @@
 FROM debian:wheezy
-MAINTAINER Roman Atachiants "roman@misakai.com"
+MAINTAINER Erick Almeida "ephillipe@gmail.com"
 
 # S3FS Version
 ENV S3FS_VERSION="1.78"
+
+# S3FS Data Directory
+ENV S3FS_DATA="/data"
 
 # Make sure we have S3
 WORKDIR /deploy
@@ -15,7 +18,7 @@ RUN apt-get update -qq \
 	&& ./configure --prefix=/usr \
 	&& make \
 	&& make install \
-	&& mkdir /data \
+	&& mkdir $S3FS_DATA \
 	&& chmod 777 /data \
 	&& apt-get remove -y --purge --force-yes build-essential libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget \
 	&& apt-get autoremove -y --force-yes \
@@ -23,6 +26,6 @@ RUN apt-get update -qq \
 	&& rm -rf /deploy
 
 WORKDIR /
-VOLUME /data
+VOLUME $S3FS_DATA
 
 CMD ["/bin/bash", "/usr/local/bin/deploy.sh"]
