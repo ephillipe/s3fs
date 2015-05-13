@@ -5,7 +5,7 @@ MAINTAINER Erick Almeida "ephillipe@gmail.com"
 ENV S3FS_VERSION="1.78"
 
 # S3FS Data Directory
-ENV S3FS_DATA="/data"
+ENV S3FS_DATA="/opt/odoo/data/"
 
 # Make sure we have S3
 WORKDIR /deploy
@@ -18,8 +18,8 @@ RUN apt-get update -qq \
 	&& ./configure --prefix=/usr \
 	&& make \
 	&& make install \
-	&& mkdir $S3FS_DATA \
-	&& chmod 777 /data \
+	&& mkdir -p $S3FS_DATA \
+	&& chmod 777 $S3FS_DATA \
 	&& apt-get remove -y --purge --force-yes build-essential libfuse-dev libcurl4-openssl-dev libxml2-dev mime-support automake libtool wget \
 	&& apt-get autoremove -y --force-yes \
 	&& apt-get install -y libcurl3 libxml2 \
@@ -27,5 +27,7 @@ RUN apt-get update -qq \
 
 WORKDIR /
 VOLUME $S3FS_DATA
+
+COPY deploy.sh /usr/local/bin/deploy.sh
 
 CMD ["/bin/bash", "/usr/local/bin/deploy.sh"]
